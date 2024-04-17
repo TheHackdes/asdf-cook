@@ -1,11 +1,37 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e
+set -o pipefail
 
-current_script_path=${BASH_SOURCE[0]}
-plugin_dir=$(dirname "$(dirname "$current_script_path")")
+fail() {
+  echo -e "\e[31mFail:\e[m $*"
+  exit 1
+}
 
-# shellcheck source=./lib/utils.bash
-source "${plugin_dir}/lib/utils.bash"
+install_cook() {
+  local install_type=$1
+  local version=$2
+  local install_path=$3
 
-install_version "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+  if [ "$install_type" != "version" ]; then
+    fail "asdf-fzf supports release installs only"
+  fi
+
+  #local download_url
+  #download_url="https://github.com/junegunn/fzf/archive/${version}.tar.gz"
+  #local source_path="${install_path}/${version}.tar.gz"
+
+  (
+    echo "∗ Downloading and installing cook..."
+    go install -v github.com/glitchedgitz/cook/v2/cmd/cook@latest    
+    echo ""
+    echo "The installation was successful!"
+    echo ""
+    echo "If you'd like to generate configuration files, "
+    echo "Launch '${install_path}/install' ."
+  ) || (
+    rm -rf "$install_path"
+    fail "An error occurred"
+  )}
+
+install_cook "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
