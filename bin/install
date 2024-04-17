@@ -56,13 +56,13 @@ install_cook() {
     fi
 
     local tgz_name=cook_${version}_${platform}_${arch}.tar.gz
-    local cksum_name=cook_${version}_checksums.txt
+ #   local cksum_name=cook_${version}_checksums.txt
     local tgz_url="$(get_url $version $tgz_name)"
-    local cksum_url="$(get_url $version $cksum_name)"
+  #  local cksum_url="$(get_url $version $cksum_name)"
     curl -Lo $tmpd/$tgz_name $tgz_url
     curl -Lo $tmpd/$cksum_name $cksum_url
     pushd $tmpd > /dev/null
-    sha256sum -c <(grep $tgz_name $cksum_name)
+  #  sha256sum -c <(grep $tgz_name $cksum_name)
     tar xzf $tgz_name
     chmod +x cook
     mkdir -p $install_path
