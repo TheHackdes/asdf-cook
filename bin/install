@@ -66,7 +66,8 @@ install_cook() {
     echo "${install_path}" >&2
     echo "=================================================" >&2
     mkdir -p $install_path
-    go build cook-${version}/v2/cmd/cook/ -o $bin_path
+    cd cook-${version}/v2/cmd/cook/
+    go build -o $bin_path/
     #mv cook-${version}/V2/cmd/cook $bin_path
     popd > /dev/null
 }
