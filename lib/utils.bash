@@ -5,7 +5,7 @@ set -euo pipefail
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for cook.
 GH_REPO="https://github.com/glitchedgitz/cook"
 TOOL_NAME="cook"
-TOOL_TEST="cook --version"
+TOOL_TEST="cook"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
@@ -31,9 +31,8 @@ list_github_tags() {
 }
 
 list_all_versions() {
-	# TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-	# Change this function if cook has other means of determining installable versions.
-	list_github_tags
+	local tags=$(list_github_tags)
+	echo "$tags"
 }
 
 download_release() {
