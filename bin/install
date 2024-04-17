@@ -61,7 +61,7 @@ install_cook() {
     pushd $tmpd > /dev/null
     tar xzf $tgz_name
     echo "XHEREEE : `pwd`"
-    chmod +x cook
+    chmod +x cook-${version}
     echo "=================================================" >&2
     echo "${install_path}" >&2
     echo "=================================================" >&2
