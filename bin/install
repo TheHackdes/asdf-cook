@@ -60,6 +60,7 @@ install_cook() {
     curl -Lo $tmpd/$tgz_name $tgz_url
     pushd $tmpd > /dev/null
     tar xzf $tgz_name
+    echo "XHEREEE : `pwd`"
     chmod +x cook
     echo "=================================================" >&2
     echo "${install_path}" >&2
