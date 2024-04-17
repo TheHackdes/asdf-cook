@@ -65,9 +65,9 @@ install_cook() {
   #  sha256sum -c <(grep $tgz_name $cksum_name)
     tar xzf $tgz_name
     chmod +x cook
-    echo "================================================="
+    echo "=================================================" >&2
     echo "$install_path" >&2
-    echo "================================================="
+    echo "=================================================" >&2
     mkdir -p $install_path
     mv cook $bin_path
     popd > /dev/null
